@@ -1,49 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>5kyd3x Entry</title>
 
 <style>
 html, body {
-  margin: 0;
-  padding: 0;
-  background: black;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
 }
 
 video {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>
 </head>
 
 <body>
 
-<video id="entryVideo" autoplay muted loop playsinline preload="auto">
-  <source src="https://raw.githubusercontent.com/cl3n/0R4CL3/main/5kyd3x_3ntry.mov" type="video/quicktime">
+<video
+    id="bgVideo"
+    autoplay
+    muted
+    loop
+    playsinline
+    webkit-playsinline
+    preload="auto"
+>
+    <source src="https://raw.githubusercontent.com/cl3n/0R4CL3/main/5kyd3x_3ntry.mov" type="video/mp4">
 </video>
 
 <script>
-const video = document.getElementById("entryVideo");
+const video = document.getElementById('bgVideo');
 
 video.muted = true;
-video.playsInline = true;
 
-window.addEventListener("load", () => {
-  video.play().catch(() => {
-    document.body.addEventListener("touchstart", () => {
-      video.play();
-    }, { once: true });
-  });
-});
+const playVideo = async () => {
+    try {
+        await video.play();
+    } catch (e) {
+        console.log("Autoplay blocked");
+    }
+};
+
+window.addEventListener('load', playVideo);
+window.addEventListener('touchstart', playVideo, { once: true });
 </script>
 
 </body>
